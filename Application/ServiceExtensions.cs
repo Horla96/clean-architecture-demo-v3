@@ -8,6 +8,7 @@ namespace Application
         public static void AddApplication(this IServiceCollection services)
         {
             //Add application services here
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddMediatR(conf => conf.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         }
     }
