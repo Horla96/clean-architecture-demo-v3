@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Application
 {
@@ -6,7 +7,8 @@ namespace Application
     {
         public static void AddApplication(this IServiceCollection services)
         {
-
+            //Add application services here
+            services.AddMediatR(conf => conf.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
         }
     }
 }
