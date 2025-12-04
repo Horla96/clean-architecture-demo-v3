@@ -3,6 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Context;
+using Persistence.IdentityModels;
+using Persistence.Seeds;
+using Persistence.SharedServices;
 
 namespace Persistence
 {
@@ -15,7 +18,16 @@ namespace Persistence
                 configuration.GetConnectionString("DefaultConnection")
                 ));
 
+            services.AddIdentityCore<ApplicationUser>()
+             .AddRoles<ApplicationRole>()
+             .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+
+            services.AddTransient<IAccountService, AccountService>();
+            //seeds roles and users
+            DefaultRoles.SeedRolesAsync(services.BuildServiceProvider()).Wait();
+            DefaultUsers.SeedUsersAsync(services.BuildServiceProvider()).Wait();
         }
     }
 }
