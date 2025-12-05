@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Infrastructure.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
 {
@@ -6,7 +7,9 @@ namespace Infrastructure
     {
         public static void AddInfrastructure(this IServiceCollection services)
         {
+            // Add infrastructure services here
 
+            services.AddTransient<IEmailService, EmailService>();
         }
     }
 }
