@@ -19,6 +19,7 @@ namespace Persistence
                 configuration.GetConnectionString("DefaultConnection")
                 ));
 
+            services.AddDataProtection();
             services.AddIdentityCore<ApplicationUser>()
              .AddRoles<ApplicationRole>()
              .AddEntityFrameworkStores<ApplicationDbContext>()
