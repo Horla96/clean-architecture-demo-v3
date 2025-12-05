@@ -41,10 +41,10 @@ namespace Persistence.SharedServices
                 throw new ApiException($"Email not confirmed, pls confirm your email to login");
             }
 
-            //if (await _userManager.IsLockedOutAsync(user))
-            //{
-            //    throw new ApiException($"Your account is locked, please try agina later.");
-            //}
+            if (await _userManager.IsLockedOutAsync(user))
+            {
+                throw new ApiException($"Your account is locked, please try again later.");
+            }
 
             var succeeded = await _userManager.CheckPasswordAsync(user, request.Password);
             if (!succeeded)
